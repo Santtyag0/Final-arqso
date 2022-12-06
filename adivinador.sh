@@ -1,35 +1,44 @@
-ALEATORIO=$(( $RANDOM % 50 + 1 ))
-TEXTO="ESTE ES EL ADIVINADOR"
-echo $TEXTO
-CONTADOR=0
+numeroRand=$(( $RANDOM % 50 + 1 ))
+contador=0
+echo "-----------------------------------------------------------------------------"
+echo "SE GENERÓ UN NUMERO ALEATORIO ENTRE 1 Y 50, TENES 10 INTENTOS PARA ADIVINARLO."
+echo "-----------------------------------------------------------------------------"
 for i in {1..11} 
-do
-	CONTADOR=$i
-	echo "INGRESE UN NUMERO:"
-	read NUMERO
-	if [ "$NUMERO" -lt "1" ] || [ "$NUMERO" -gt "50" ]; 
-	then
-		echo "Tienes que ingresar un numero entre 1 y 50."
-		continue
-	elif [ "$NUMERO" -lt "$ALEATORIO" ] 
-	then
-		echo "El numero que buscas es mayor al que ingresaste. Intenta de nuevo."
-	elif [ "$NUMERO" -gt "$ALEATORIO" ] 
-	then
-		echo "El numero que buscas es menor al que ingresaste. Intenta de nuevo."
+do	
+	contador=$i
+	if [ "$i" -lt "11" ];
+		then
+		echo "INTENTO" $contador
+		echo "INGRESE UN NUMERO:"
+		read numero
+		if [ "$numero" -lt "1" ] || [ "$numero" -gt "50" ]; 
+		then
+			echo "el numero ingresado debe estar entre 1 y 50."
+			continue
+		elif [ "$numero" -lt "$numeroRand" ] 
+		then
+			clear
+			echo "El numero aleatorio es MAYOR a $numero."
+		elif [ "$numero" -gt "$numeroRand" ] 
+		then
+			clear
+			echo "El numero aleatorio es MENOR al $numero."
+		else
+			break
+		fi
 	else
 		break
 	fi
 done
-if [ "$CONTADOR" -le "5" ] 
+if [ "$contador" -le "5" ] 
 then
 	echo "Adivinar numeros es lo tuyo crack."
-	sleep 3
-elif [ "$CONTADOR" -ge "6" ] && [ "$CONTADOR" -le "10" ]
+	sleep 5
+elif [ "$contador" -ge "6" ] && [ "$contador" -le "10" ]
 then
-	echo "Ganaste, solo te llevó" $CONTADOR "intentos."
-	sleep 3
+	echo "Ganaste, solo te llevó $contador intentos."
+	sleep 5
 else
 	echo "definitivamente adivinar numeros no es lo tuyo :("
-	sleep 3
+	sleep 5
 fi
